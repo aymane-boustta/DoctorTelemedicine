@@ -9,6 +9,8 @@ import Pojos.Patient;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +23,7 @@ public class OutputText {
 
     //Recibe un file y crea el objeto patient. return Patient
     public Patient outputPatientDataText(String fileName) {
-
+        Patient patient = null;
         File file = new File("PatientsDB/" + fileName + "/" + fileName + ".txt");
         FileReader fr = null;
         try {
@@ -32,6 +34,7 @@ public class OutputText {
         BufferedReader br = new BufferedReader(fr);
 
         try {
+            String dni = br.readLine();
             String name = br.readLine();
             String surname = br.readLine();
             DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
@@ -42,7 +45,7 @@ public class OutputText {
             String sexe = br.readLine();
             String doctor = br.readLine();
 
-            Patient patient = new Patient(name, surname, dob, address, email, age, sexe, doctor);
+            patient = new Patient(dni, name, surname, dob, address, email, age, sexe);
             System.out.println(patient.toString());
 
         } catch (IOException ex) {
@@ -51,11 +54,35 @@ public class OutputText {
             ex.printStackTrace();
         }
 
-        return null;
+        return patient;
     }
 
     //Recibe un file y crea un objeto bitalino. return Bitalino!!!!!!!
-    public void outputBitalinoDataText() {
+    public ArrayList showBitalinoSignal(String nameFile) {
+        File file = new File("PatientsDB/08765425t/signal.txt");
 
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            fr = new FileReader(file);
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        br = new BufferedReader(fr);
+        ArrayList<Integer> arrayPulses = new ArrayList();
+        String line = null;
+        try {
+            while ((line = br.readLine()) != null) {
+                arrayPulses.add(Integer.parseInt(line));
+
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(OutputText.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return arrayPulses;
     }
 }

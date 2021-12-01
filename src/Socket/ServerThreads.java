@@ -24,10 +24,13 @@ public class ServerThreads {
             while (true) {
                 //Thie executes when we have a client
                 Socket socket = serverSocket.accept();
+                new Thread(new ServerThreadsPatientUser(socket)).start();
                 new Thread(new ServerThreadsPatient(socket)).start();
+
             }
         } finally {
             releaseResourcesServer(serverSocket);
+
         }
     }
 

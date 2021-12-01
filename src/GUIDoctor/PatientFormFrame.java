@@ -53,14 +53,14 @@ public class PatientFormFrame extends javax.swing.JFrame {
         ageLabel = new javax.swing.JTextField();
         ageField = new javax.swing.JTextField();
         sexLabel = new javax.swing.JTextField();
-        dobChooser = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         sexeField = new javax.swing.JTextField();
-        doctorLabel = new javax.swing.JTextField();
-        doctorField = new javax.swing.JTextField();
         datosIntroducidosOK = new javax.swing.JLabel();
         paswordLabel = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        dobChooser = new com.toedter.calendar.JDateChooser();
+        dniLabel = new javax.swing.JLabel();
+        dniTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,8 +144,6 @@ public class PatientFormFrame extends javax.swing.JFrame {
             }
         });
 
-        dobChooser.setName("dobChooser"); // NOI18N
-
         jButton1.setText("Accept");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,20 +157,6 @@ public class PatientFormFrame extends javax.swing.JFrame {
             }
         });
 
-        doctorLabel.setEditable(false);
-        doctorLabel.setText("Doctor:");
-        doctorLabel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorLabelActionPerformed(evt);
-            }
-        });
-
-        doctorField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorFieldActionPerformed(evt);
-            }
-        });
-
         paswordLabel.setEditable(false);
         paswordLabel.setText("Pasword: ");
         paswordLabel.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +164,8 @@ public class PatientFormFrame extends javax.swing.JFrame {
                 paswordLabelActionPerformed(evt);
             }
         });
+
+        dniLabel.setText("DNI:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,48 +179,56 @@ public class PatientFormFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(emailField))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(surnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(surnameField)
-                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(dobChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(addressField))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sexeField)
+                                    .addComponent(ageField)
+                                    .addComponent(txtPassword)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(surnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dniLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(surnameField)
+                                    .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(dobChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dniTextField))))
+                        .addGap(117, 117, 117)
+                        .addComponent(datosIntroducidosOK, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(addressField))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(paswordLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sexeField)
-                            .addComponent(ageField)
-                            .addComponent(doctorField)
-                            .addComponent(txtPassword))))
-                .addGap(117, 117, 117)
-                .addComponent(datosIntroducidosOK, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                        .addComponent(paswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datosIntroducidosOK))
+                    .addComponent(dniLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(datosIntroducidosOK)))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(surnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,15 +253,11 @@ public class PatientFormFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sexLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sexeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doctorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(paswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(59, 59, 59))
         );
@@ -321,6 +311,7 @@ public class PatientFormFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //create the patient
+        String dniLabel = dniTextField.getText();
         String nameLabel = nameField.getText();
         String surnameLabel = surnameField.getText();
         Date dobLabel = dobChooser.getDate();
@@ -328,8 +319,8 @@ public class PatientFormFrame extends javax.swing.JFrame {
         String emailLabel = emailField.getText();
         Integer ageLabel = Integer.parseInt(ageField.getText());
         String sexeLabel = sexeField.getText();
-        String doctorLabel = doctorField.getText();
-        this.patient = new Patient(nameLabel, surnameLabel, dobLabel, addressLabel, emailLabel, ageLabel, sexeLabel, doctorLabel);
+
+        this.patient = new Patient(dniLabel, nameLabel, surnameLabel, dobLabel, addressLabel, emailLabel, ageLabel, sexeLabel);
 
         //get the password created
         String secretKey = "had";
@@ -354,8 +345,7 @@ public class PatientFormFrame extends javax.swing.JFrame {
 
         //Write the Patient and Passord in a .txt
         inputText.inputPatientDataText(patient);
-        inputText.inputPassword(encodedPassword, nameLabel);
-        System.out.println(patient);
+        inputText.inputPassword(encodedPassword, dniLabel);
 
         // OK, DATOS ENVIADOS, REDIRECCION, etc...
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -363,14 +353,6 @@ public class PatientFormFrame extends javax.swing.JFrame {
     private void sexeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexeFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sexeFieldActionPerformed
-
-    private void doctorLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doctorLabelActionPerformed
-
-    private void doctorFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doctorFieldActionPerformed
 
     private void paswordLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paswordLabelActionPerformed
         // TODO add your handling code here:
@@ -433,10 +415,10 @@ public class PatientFormFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ageField;
     private javax.swing.JTextField ageLabel;
     private javax.swing.JLabel datosIntroducidosOK;
+    private javax.swing.JLabel dniLabel;
+    private javax.swing.JTextField dniTextField;
     private com.toedter.calendar.JDateChooser dobChooser;
     private javax.swing.JTextField dobLabel;
-    private javax.swing.JTextField doctorField;
-    private javax.swing.JTextField doctorLabel;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField emailLabel;
     private javax.swing.JButton jButton1;

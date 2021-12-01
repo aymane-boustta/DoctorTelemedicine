@@ -15,33 +15,20 @@ import java.util.Date;
 public class Patient implements Serializable {
 
     private static final long serialVersionUID = -1156840724257282729L;
-    private Integer id;
+
+    private String dni;
     private String name;
     private String surname;
     private Date dob;
     private String address;
     private String email;
-    private String medicalHistory;
-    private int age;
+    private Integer age;
     private String sexe;
     //private Doctor doctor;
-    private String doctor;
-
-    public Patient(Integer id, String name, String surname, Date dob, String address, String email, String medicalHistory, int age, String sexe, String doctor) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.dob = dob;
-        this.address = address;
-        this.email = email;
-        this.medicalHistory = medicalHistory;
-        this.age = age;
-        this.sexe = sexe;
-        this.doctor = doctor;
-    }
 
     //costructor sin Id,medicalHistory
-    public Patient(String name, String surname, Date dob, String address, String email, int age, String sexe, String doctor) {
+    public Patient(String dni, String name, String surname, Date dob, String address, String email, Integer age, String sexe) {
+        this.dni = dni;
         this.name = name;
         this.surname = surname;
         this.dob = dob;
@@ -49,12 +36,7 @@ public class Patient implements Serializable {
         this.email = email;
         this.age = age;
         this.sexe = sexe;
-        this.doctor = doctor;
-    }
 
-    @Override
-    public String toString() {
-        return "Patient{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", address=" + address + ", email=" + email + ", medicalHistory=" + medicalHistory + ", age=" + age + ", sexe=" + sexe + ", doctor=" + doctor + '}';
     }
 
     public String getName() {
@@ -77,12 +59,16 @@ public class Patient implements Serializable {
         return email;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
     public String getSexe() {
         return sexe;
+    }
+
+    public String getDni() {
+        return dni;
     }
 
 }

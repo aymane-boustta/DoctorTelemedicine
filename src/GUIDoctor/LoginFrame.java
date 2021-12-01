@@ -5,6 +5,15 @@
  */
 package GUIDoctor;
 
+import java.io.*;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 
 /**
@@ -94,15 +103,16 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         //Hay que hacer una carpeta con las contraseñas referenciadas al Dni
         //Hacer un funcion que busca el DNI y la contraseñas introducidas y las cojan y convierta en variables
-        String DNI = "a";
-        String password = "b";
+        String secretKey = "had";
+        String DNI = txtDNI.getText();
+        String passwordIntroduced = new String(Password.getPassword());
+        Boolean right = findPatient(DNI, passwordIntroduced, secretKey);
 
-        String Pass = new String(Password.getPassword());
-        if (Pass.equals(password) && txtDNI.getText().equals(DNI)) {
+        if (right.equals(true)) {
             //usar un if para abrir el frame del doctor o patient
             //open frame to record a new signal
-            PatientInterfaceFrame PI = new PatientInterfaceFrame();
-            PI.setVisible(true);
+            DoctorLobbyFrame doctorLobbyFrame = new DoctorLobbyFrame();
+            doctorLobbyFrame.setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "NIF or Password incorrect, Please try again ");
@@ -110,6 +120,50 @@ public class LoginFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1MouseClicked
 
+    public Boolean findPatient(String introducedDni, String introducedPassword, String secretKey) {
+        String encodedPassword = encodePassword(secretKey, introducedPassword);
+        Boolean right = false;
+        try {
+            FileReader reader = new FileReader("PasswordDB/" + introducedDni + "/password" + introducedDni + ".txt");
+            BufferedReader bufferReader = new BufferedReader(reader);
+            String line;
+
+            while ((line = bufferReader.readLine()) != null) {
+                if (line.equals(encodedPassword)) {
+                    right = true;
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return right;
+    }
+
+    public String encodePassword(String key, String cadena) {
+        String encription = "";
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] keyPassword = md5.digest(key.getBytes("utf-8"));//utf in case there are dashe or something other than characters
+            byte[] copyKeyPassword = Arrays.copyOf(keyPassword, 24);
+            SecretKey secretKey = new SecretKeySpec(copyKeyPassword, "DESede");
+            Cipher cipher = Cipher.getInstance("DESede");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            //encrptacion
+            byte[] bytePassword = cadena.getBytes("utf-8");
+            byte[] buffer = cipher.doFinal(bytePassword);
+            byte[] base64Bytes = Base64.getEncoder().encode(buffer);
+            encription = new String(base64Bytes);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Something went wrong");
+        }
+        return encription;
+    }
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDNIActionPerformed

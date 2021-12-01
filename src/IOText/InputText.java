@@ -26,16 +26,16 @@ public class InputText {
         PrintWriter pw = null;
 
         //check if the directory of the patient exists
-        File carpeta = new File("PatientsDB/" + patient.getName());
+        File carpeta = new File("PatientsDB/" + patient.getDni());
         if (carpeta.exists()) {
             System.out.println("Patient is already in the DB");
         } else {
             try {
-                File newCarpeta = new File("PatientsDB/" + patient.getName());
+                File newCarpeta = new File("PatientsDB/" + patient.getDni());
                 newCarpeta.mkdir();
-                file = new FileWriter("PatientsDB/" + patient.getName() + "/" + patient.getName() + ".txt");
+                file = new FileWriter("PatientsDB/" + patient.getDni() + "/" + patient.getDni() + ".txt");
                 pw = new PrintWriter(file);
-
+                pw.println(patient.getDni());
                 pw.println(patient.getName());//name
                 pw.println(patient.getSurname());//surname
                 pw.println(patient.getDob());//dob
@@ -70,7 +70,7 @@ public class InputText {
                 //tools to write in a txt file
                 File newFile = new File("PasswordDB/" + Dni);
                 newFile.mkdir();
-                file = new FileWriter("PasswordDB/" + Dni + "/" + Dni + ".txt");
+                file = new FileWriter("PasswordDB/" + Dni + "/password" + Dni + ".txt");
                 pw = new PrintWriter(file);
                 pw.println(encodedPassword);
 
@@ -88,5 +88,4 @@ public class InputText {
 
     }
 
-   
 }
